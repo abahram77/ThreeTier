@@ -22,6 +22,11 @@ public class EntityStorage<T extends Entity> {
             list.put(id, item);
         return id;
     }
+    public int rem(int id) {
+        list.remove(id);
+        return id;
+    }
+
 
     public ArrayList<T> getAll() {
         return new ArrayList<T>(list.values());

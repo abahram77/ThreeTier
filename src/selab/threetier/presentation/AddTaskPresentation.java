@@ -30,6 +30,17 @@ public class AddTaskPresentation extends JSONPresentation {
         } catch (ParseException ex) {
             throw new IOException("Invalid date/time format");
         }
+//        String DateE=newTask.getEndDate();
+//        String DateS=newTask.getStartDate();
+//        String TimeE=newTask.getEndTime();
+//        String TimeS=newTask.getStartTime();
+        if(newTask.getEndDate().compareTo(newTask.getStartDate())<0){
+            throw new IOException("End time must be after Start time");
+        }else if(newTask.getEndDate().compareTo(newTask.getStartDate())==0){
+            if(newTask.getEndTime().compareTo(newTask.getStartTime())<0) {
+                throw new IOException("End time must be after Start time");
+            }
+        }
         newTask.save();
 
         Map<String, String> result = new HashMap<>();

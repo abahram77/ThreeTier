@@ -15,9 +15,7 @@ public class Task extends Entity {
     public void setTitle(String value) { title = value; }
 
     public void setStart(Date value) { start = value; }
-    public String getStartDate() {
-        return new SimpleDateFormat("YYYY-MM-DD").format(start);
-    }
+    public String getStartDate() {return new SimpleDateFormat("yyyy-MM-dd").format(start);}
     public String getStartTime() {
         return new SimpleDateFormat("HH:mm:ss").format(start);
     }
@@ -26,10 +24,16 @@ public class Task extends Entity {
     public String getEndTime() {
         return new SimpleDateFormat("HH:mm:ss").format(end);
     }
+    public String getEndDate() {return new SimpleDateFormat("yyyy-MM-dd").format(end);
+    }
 
     public void save() {
         Storage.getInstance().getTasks().addOrUpdate(this);
+
     }
+    public static void remove(int id) {Storage.getInstance().getTasks().rem(id);}
+
+
 
     public static ArrayList<Task> getAll() {
         return Storage.getInstance().getTasks().getAll();

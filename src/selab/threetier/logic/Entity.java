@@ -7,4 +7,5 @@ public abstract class Entity {
 
     public int getId() { return id; }
     public void setId(int value) { id = value; }
+
 }
