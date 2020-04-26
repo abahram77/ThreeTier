@@ -1,9 +1,12 @@
 package selab.threetier.logic;
 
+import selab.threetier.storage.EntityStorage;
 import selab.threetier.storage.Storage;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Task extends Entity {
@@ -29,6 +32,8 @@ public class Task extends Entity {
 
     public void save() {
         Storage.getInstance().getTasks().addOrUpdate(this);
+        EntityStorage<Task> allTasks= Storage.getInstance().getTasks();
+
 
     }
     public static void remove(int id) {Storage.getInstance().getTasks().rem(id);}
@@ -36,6 +41,14 @@ public class Task extends Entity {
 
 
     public static ArrayList<Task> getAll() {
-        return Storage.getInstance().getTasks().getAll();
+        ArrayList<Task> allTasks = Storage.getInstance().getTasks().getAll();
+        Collections.sort(allTasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return t1.start.compareTo(t2.start);
+            }
+        });
+
+        return allTasks;
     }
 }
